@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MuseoMaster" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryVariant">@color/light_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -20,5 +20,8 @@
         <!-- Other style attributes -->
     </style>
 
+    <style name="NavigationViewTextAppearance" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">24sp</item>
+    </style>
 
 </resources>
