@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import eu.pl.snk.senseibunny.museomaster.R
-
+import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 
 
 class ReportFragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
