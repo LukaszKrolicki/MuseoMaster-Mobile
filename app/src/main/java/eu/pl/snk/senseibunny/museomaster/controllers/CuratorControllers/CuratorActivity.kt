@@ -35,7 +35,7 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         when(item.itemId){
             R.id.nav_task_list -> {openFragment(TaskListCuratorFragment())}
             R.id.nav_add_task-> {openFragment(AddTaskCuratorFragment())}
-            R.id.nav_create_exh -> {}
+            R.id.nav_create_exh -> {openFragment(CreateExhibitionFragment())}
             R.id.nav_exh_list -> {}
             R.id.add_exhibit -> {}
             R.id.exhibit_list -> {}

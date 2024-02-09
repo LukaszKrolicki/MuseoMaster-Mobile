@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         System.out.println("xd")
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(this, AdminActivity::class.java)
+            val intent = Intent(this, CuratorActivity::class.java)
             startActivity(intent)
         }
     }
