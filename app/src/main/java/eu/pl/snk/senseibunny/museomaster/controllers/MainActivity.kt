@@ -10,6 +10,7 @@ import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActiv
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
+import eu.pl.snk.senseibunny.museomaster.models.Model
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
@@ -33,16 +34,15 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
+        //Create Model on different thread
         Thread {
             try {
-                System.out.println("koniec")
-                dataBaseDriver = DataBaseDriver(this);
+                Model.getInstance()
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
         }.start()
 
-        System.out.println("xd")
 
         binding.loginButton.setOnClickListener {
             val intent = Intent(this, AdminActivity::class.java)
