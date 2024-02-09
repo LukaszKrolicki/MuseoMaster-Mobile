@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#FF00FF44</color>
     <color name="dark_green">#FF008E26</color>
+    <color name="error">#FD0000</color>
+    <color name="success">#4CAF50</color>
 </resources>
