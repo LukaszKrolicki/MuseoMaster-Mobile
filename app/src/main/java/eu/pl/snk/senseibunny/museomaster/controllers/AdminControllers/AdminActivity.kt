@@ -62,7 +62,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     //perform operation on database
     fun performDatabaseOperation(): ResultSet {
-        val x: ResultSet = Model.getInstance().dataBaseDriver.getExById(1)
+        val x: ResultSet = Model.getInstance(this).dataBaseDriver.getExById(1)
 
         return x
     }

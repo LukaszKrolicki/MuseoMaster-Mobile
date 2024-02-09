@@ -8,9 +8,9 @@ public class Model {
     private static Model model;
     private DataBaseDriver dataBaseDriver;
 
-    private Model() throws SQLException {
+    private Model(Context context) throws SQLException {
 
-        this.dataBaseDriver = new DataBaseDriver();
+        this.dataBaseDriver = new DataBaseDriver(context);
 
     }
 
@@ -18,9 +18,9 @@ public class Model {
         return dataBaseDriver;
     }
 
-    public static synchronized Model getInstance() throws SQLException {
+    public static synchronized Model getInstance(Context context) throws SQLException {
         if (model == null) {
-            model = new Model();
+            model = new Model(context);
         }
         return model;
     }

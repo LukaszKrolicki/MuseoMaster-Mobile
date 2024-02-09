@@ -11,33 +11,32 @@ import java.util.Properties;
 
 public class DataBaseDriver{
     private Connection conn;
-    private Context context;
-    public DataBaseDriver() throws SQLException {
-//        this.context=context;
+    public DataBaseDriver(Context context) throws SQLException {
+
 
         String password="";
         try{
 
-//            try {
-//                Properties properties = new Properties();
-//
-////                Resources resources = context.getResources();
-////                InputStream configFile = context.getResources().getAssets().open("config.properties");
-////                properties.load(configFile);
-//
-//                password = properties.getProperty("db.password");
-//
-//                // ...
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
+            try {
+                Properties properties = new Properties();
+
+                Resources resources = context.getResources();
+                InputStream configFile = context.getResources().getAssets().open("config.properties");
+                properties.load(configFile);
+
+                password = properties.getProperty("db.password");
+
+                // ...
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
 
         String url = "jdbc:mysql://10.0.2.2:3306/MuseoMaster?useSSL=false";
         String username = "remoteUser";
 
 
-        conn = DriverManager.getConnection(url, username, "OsheePijeBoLubie123");
+        conn = DriverManager.getConnection(url, username, password);
         System.out.println("Database connection established");
 
 

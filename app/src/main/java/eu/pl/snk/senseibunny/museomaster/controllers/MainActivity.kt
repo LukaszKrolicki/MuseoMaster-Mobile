@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         //Create Model on different thread
         Thread {
             try {
-                Model.getInstance()
+                Model.getInstance(this)
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
