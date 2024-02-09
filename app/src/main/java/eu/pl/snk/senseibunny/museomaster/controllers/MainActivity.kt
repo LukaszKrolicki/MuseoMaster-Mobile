@@ -7,6 +7,7 @@ import com.google.android.gms.security.ProviderInstaller
 
 import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActivity
+import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.CuratorActivity
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
