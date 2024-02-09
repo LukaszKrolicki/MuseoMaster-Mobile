@@ -31,6 +31,7 @@ class ClientAdapter(private val clientList: ArrayList<Client>) : RecyclerView.Ad
         fun bind(client: Client) {
             nameTextView.text = client.getNazwaUzytkownika()
             emailTextView.text = client.emailPracownikaProperty()
+            itemBinding.work.text = client.rola
         }
     }
 }

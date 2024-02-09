@@ -12,12 +12,15 @@ public class Model {
 
     //Admin
     private final ArrayList<Client> clients;
+
+    private final ArrayList<Report> reports;
     ////////////////////////////////
 
     private Model(Context context) throws SQLException {
 
         this.dataBaseDriver = new DataBaseDriver(context);
         this.clients = new ArrayList<Client>();
+        this.reports=new ArrayList<Report>();
 
     }
 
@@ -57,6 +60,26 @@ public class Model {
 
     public ArrayList<Client> getClients() {
         return clients;
+    }
+
+    public ArrayList<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports() {
+        ResultSet resultSet = dataBaseDriver.getAllReporstData();
+
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("idPracownika");
+                String nazwaUzytkownika = resultSet.getString("username");
+                String opis = resultSet.getString("opis");
+                Integer idR = resultSet.getInt("idRaportu");
+                reports.add(new Report(id, idR, nazwaUzytkownika, opis));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     ////////////////////////////////////////////////////////////////

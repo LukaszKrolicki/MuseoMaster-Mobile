@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="8dp"
     android:layout_margin="8dp"
-    android:background="@drawable/item_user_background">
+    android:background="@drawable/item_report_background">
 
     <ImageView
         android:id="@+id/workerIcon"
@@ -15,49 +15,28 @@
         android:layout_height="30dp"
         android:layout_margin="5dp"
 
-        app:tint="@color/dark_green"
-        android:src="@drawable/baseline_person_24" />
+        app:tint="#FFFFC107"
+        android:src="@drawable/baseline_bug_report_24" />
 
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:gravity="center"
+        android:gravity="left|center"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginStart="8dp"
-        android:text="Jakub" />
-
-    <TextView
-        android:id="@+id/secondNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.3"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginStart="8dp"
-        android:textStyle="bold"
-        android:text="Kucaba" />
+        android:text="Jakubsss" />
 
 
-
-    <TextView
-        android:id="@+id/work"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="0.6"
-        android:textSize="16sp"
-        android:layout_marginStart="8dp"
-        android:text="Pracownik techniczny+" />
 
     <ImageView
         android:id="@+id/otherIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="5dp"
-        app:tint="@color/dark_green"
+        app:tint="#FFFFC107"
         android:src="@drawable/baseline_content_paste_search_24" />
 
 </LinearLayout>
