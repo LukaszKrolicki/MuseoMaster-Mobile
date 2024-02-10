@@ -53,7 +53,7 @@
         android:text="Pracownik techniczny+" />
 
     <ImageView
-        android:id="@+id/otherIcon"
+        android:id="@+id/detailsIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="5dp"

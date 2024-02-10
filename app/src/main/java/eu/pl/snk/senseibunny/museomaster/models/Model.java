@@ -35,6 +35,11 @@ public class Model {
         return model;
     }
 
+    public static synchronized Model getInstanceWC() throws SQLException {
+
+        return model;
+    }
+
 
     //Admin Section ********************************
     public void setClients() {
