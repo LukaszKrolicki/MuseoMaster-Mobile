@@ -15,6 +15,11 @@
         android:theme="@style/Theme.MuseoMaster"
         tools:targetApi="31">
         <activity
+            android:name=".controllers.NormalWorkerControllers.NormalWorkerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_normal_worker"
+            android:theme="@style/Theme.MuseoMaster" />
+        <activity
             android:name=".controllers.CuratorControllers.CuratorActivity"
             android:exported="false" />
         <activity

@@ -8,6 +8,7 @@ import com.google.android.gms.security.ProviderInstaller
 import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.CuratorActivity
+import eu.pl.snk.senseibunny.museomaster.controllers.NormalWorkerControllers.NormalWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(this, AdminActivity::class.java)
+            val intent = Intent(this, NormalWorkerActivity::class.java)
             startActivity(intent)
         }
     }
