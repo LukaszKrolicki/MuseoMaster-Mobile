@@ -33,7 +33,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         toogle.syncState()
 
         fragmentManage = supportFragmentManager
-
+        openFragment(AddUserFragment())
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
 
     }
