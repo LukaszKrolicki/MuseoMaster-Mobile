@@ -16,11 +16,16 @@ public class Model {
     private final ArrayList<Report> reports;
     ////////////////////////////////
 
+    //Curator
+    private final ArrayList<Exhibit> exhibits;
+    ////////////////////////////////
+
     private Model(Context context) throws SQLException {
 
         this.dataBaseDriver = new DataBaseDriver(context);
         this.clients = new ArrayList<Client>();
         this.reports=new ArrayList<Report>();
+        this.exhibits = new ArrayList<>();
 
     }
 
@@ -85,6 +90,37 @@ public class Model {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+
+    //Curator Section
+    public void setExhibits() {
+        ResultSet resultSet = dataBaseDriver.getAllExhibitsData();
+        try {
+            while (resultSet.next()) {
+                Integer idZabytku = resultSet.getInt("idEksponatu");
+                String nazwaEksponatu = resultSet.getString("nazwaEksponatu");
+                String okresPowstania = resultSet.getString("okresPowstania");
+                String tematyka = resultSet.getString("tematyka");
+                String tworca = resultSet.getString("twórca");
+                String aktualMiejscePrzech = resultSet.getString("aktualMiejscePrzech");
+                String opis = resultSet.getString("opis");
+                Integer WystawaidWystawy = resultSet.getInt("WystawaidWystawy");
+                Integer ZadanieidZadania = resultSet.getInt("ZadanieidZadania");
+                Integer SalaidSali = resultSet.getInt("SalaidSali");
+                Integer ZadaniePracownikidPracownika = resultSet.getInt("ZadaniePracownikidPracownika");
+                exhibits.add(new Exhibit(idZabytku, nazwaEksponatu, okresPowstania, tematyka, tworca, aktualMiejscePrzech, opis,
+                        WystawaidWystawy, ZadanieidZadania, SalaidSali, ZadaniePracownikidPracownika,""));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Exhibit> getExhibits() {
+        return exhibits;
     }
 
     ////////////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         toogle.syncState()
 
         fragmentManage = supportFragmentManager
-
+        openFragment(CreateExhibitionFragment());
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
