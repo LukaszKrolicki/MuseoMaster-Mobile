@@ -27,7 +27,7 @@ public class DataBaseDriver{
                 password = properties.getProperty("db.password");
 
                 // ...
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
 

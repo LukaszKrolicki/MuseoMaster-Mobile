@@ -26,11 +26,11 @@
             android:icon="@drawable/baseline_format_list_bulleted_24" />
         <item
             android:id="@+id/add_exhibit"
-            android:title="Exhibitions List"
+            android:title="Add Exhibit"
             android:icon="@drawable/baseline_playlist_add_24" />
         <item
             android:id="@+id/exhibit_list"
-            android:title="Exhibitions List"
+            android:title="Exhibits List"
             android:icon="@drawable/baseline_list_24" />
         <item
             android:id="@+id/search_exhibit"

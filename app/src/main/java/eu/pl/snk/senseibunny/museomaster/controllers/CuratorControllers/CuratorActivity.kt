@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import eu.pl.snk.senseibunny.museomaster.R
+import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.BugFragment
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityCuratorBinding
 
 class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -36,10 +37,11 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             R.id.nav_task_list -> {openFragment(TaskListCuratorFragment())}
             R.id.nav_add_task-> {openFragment(AddTaskCuratorFragment())}
             R.id.nav_create_exh -> {openFragment(CreateExhibitionFragment())}
-            R.id.nav_exh_list -> {}
-            R.id.add_exhibit -> {}
-            R.id.exhibit_list -> {}
-            R.id.search_exhibit -> {}
+            R.id.nav_exh_list -> {openFragment(ExhibitionsListFragment())}
+            R.id.add_exhibit -> {openFragment(AddExhibitFragment())}
+            R.id.exhibit_list -> {openFragment(ExhibitListFragment())}
+            R.id.search_exhibit -> {openFragment(SearchExhibitFragment())}
+            R.id.nav_bugs -> {openFragment(BugFragment())}
 
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
