@@ -4,7 +4,9 @@ import android.content.Context;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Model {
     private static Model model;
@@ -18,14 +20,19 @@ public class Model {
 
     //Curator
     private final ArrayList<Exhibit> exhibits;
+
+    private final ArrayList<Exhibition> exhibitions;
     ////////////////////////////////
 
     private Model(Context context) throws SQLException {
 
         this.dataBaseDriver = new DataBaseDriver(context);
+        //Admin
         this.clients = new ArrayList<Client>();
         this.reports=new ArrayList<Report>();
+        //Curator
         this.exhibits = new ArrayList<>();
+        this.exhibitions = new ArrayList<>();
 
     }
 
@@ -121,6 +128,31 @@ public class Model {
 
     public ArrayList<Exhibit> getExhibits() {
         return exhibits;
+    }
+
+
+    public ArrayList<Exhibition> getExhibitions() {
+        return exhibitions;
+    }
+
+    public void setExhibitions() {
+        ResultSet resultSet = dataBaseDriver.getAllExhibitionsData();
+
+        try {
+            while (resultSet.next()) {
+                Integer idWystawy = resultSet.getInt("idWystawy");
+                String nazwaWystawy = resultSet.getString("nazwaWystawy");
+                String sala = resultSet.getString("sala");
+                String miejsceWykonania = resultSet.getString("miejsceWykonania");
+                String tematyka = resultSet.getString("tematyka");
+                String tworca = resultSet.getString("tworca");
+                Date dataRozpoczecia = resultSet.getDate("dataRozpoczecia");
+                Date dataZakonczenia = resultSet.getDate("dataZakonczenia");
+                exhibitions.add(new Exhibition(idWystawy, nazwaWystawy, sala, miejsceWykonania, tematyka, tworca, dataRozpoczecia, dataZakonczenia));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     ////////////////////////////////////////////////////////////////
