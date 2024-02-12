@@ -31,6 +31,7 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         fragmentManage = supportFragmentManager
         openFragment(CreateExhibitionFragment());
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
+
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

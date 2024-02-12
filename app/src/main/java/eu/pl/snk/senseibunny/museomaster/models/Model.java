@@ -31,6 +31,8 @@ public class Model {
     private final ArrayList<Exhibition> exhibitions;
 
     private final ArrayList<String> allRooms;
+
+    private final ArrayList<String> rooms;
     ////////////////////////////////
 
 
@@ -54,6 +56,7 @@ public class Model {
         this.exhibits = new ArrayList<>();
         this.exhibitions = new ArrayList<>();
         this.allRooms = new ArrayList<>();
+        this.rooms = new ArrayList<>();
 
         //Normal worker
         this.tasks = new ArrayList<Task>();
@@ -240,6 +243,24 @@ public class Model {
                 String nazwa = resultSet.getString("nazwa");
                 String typ = resultSet.getString("typ");
                 allRooms.add(nazwa);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public ArrayList<String> getRooms() { return rooms; }
+    public void setRoom() {
+        ResultSet resultSet = dataBaseDriver.getRoomsNames();
+
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("idSali");
+                Integer wielksc = resultSet.getInt("wielkość");
+                String nazwa = resultSet.getString("nazwa");
+                String typ = resultSet.getString("typ");
+                rooms.add(nazwa);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
