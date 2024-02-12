@@ -28,7 +28,7 @@ public class Model {
 
     private Model(Context context) throws SQLException {
 
-        this.client = new Client(15, "", "", "", 0, 0, "x", 0, "x");
+        this.client = new Client(42, "", "", "", 0, 0, "x", 0, "x");
 
         //Admin
         this.dataBaseDriver = new DataBaseDriver(context);

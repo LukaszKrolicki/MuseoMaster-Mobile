@@ -31,8 +31,10 @@ class TaskListFragment : Fragment() {
         runBlocking {
             // Launch a coroutine in the IO dispatcher
             withContext(Dispatchers.IO) {
+                Model.getInstanceWC().clearTasks()
                 Model.getInstance(context).setTasks("assigned")
                 tasks = Model.getInstance(context).tasks
+
             }
         }
 
@@ -40,7 +42,7 @@ class TaskListFragment : Fragment() {
         binding.recyclerView.adapter=adapter
 
         val timer = Timer()
-        val delay = 5000L // Delay before the task starts (in milliseconds)
+        val delay = 0L // Delay before the task starts (in milliseconds)
         val period = 5000L // Interval between each execution (in milliseconds)
 
         //check every 5 sec for new tasks
@@ -51,10 +53,10 @@ class TaskListFragment : Fragment() {
                 runBlocking {
                     // Launch a coroutine in the IO dispatcher
                     withContext(Dispatchers.IO) {
-                        currentSize = Model.getInstance(context).tasks.size
-                        tableSizeNew = Model.getInstanceWC().getDataBaseDriver().getSizeAssignedTask(15)
-                        println(currentSize)
-                        println(tableSizeNew)
+                        currentSize = tasks.size
+                        tableSizeNew = Model.getInstanceWC().getDataBaseDriver().getSizeAssignedTask(42)
+                        println("przed"+currentSize)
+                        println("po"+tableSizeNew)
 
                     }
 
@@ -62,7 +64,7 @@ class TaskListFragment : Fragment() {
                         currentSize = tableSizeNew
                         Model.getInstanceWC().clearTasks()
                         Model.getInstanceWC().setTasks("assigned")
-                        println("Znaleziono zadanie")
+                        println("XD")
 
                         activity?.runOnUiThread {
                             adapter.notifyDataSetChanged()
