@@ -1,26 +1,27 @@
 package eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import eu.pl.snk.senseibunny.museomaster.R
-import eu.pl.snk.senseibunny.museomaster.adapters.ReportAdapter
 import eu.pl.snk.senseibunny.museomaster.adapters.TaskAdapter
-import eu.pl.snk.senseibunny.museomaster.databinding.FragmentAddRoomBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.FragmentTaskListBinding
 import eu.pl.snk.senseibunny.museomaster.models.Model
-import eu.pl.snk.senseibunny.museomaster.models.Report
 import eu.pl.snk.senseibunny.museomaster.models.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.util.Timer
+import java.util.TimerTask
 
 class TaskListFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskListBinding
     private var tasks: ArrayList<Task> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +38,45 @@ class TaskListFragment : Fragment() {
 
         val adapter= TaskAdapter(tasks)
         binding.recyclerView.adapter=adapter
+
+        val timer = Timer()
+        val delay = 5000L // Delay before the task starts (in milliseconds)
+        val period = 5000L // Interval between each execution (in milliseconds)
+
+        //check every 5 sec for new tasks
+        var currentSize=0
+        var tableSizeNew=0
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                runBlocking {
+                    // Launch a coroutine in the IO dispatcher
+                    withContext(Dispatchers.IO) {
+                        currentSize = Model.getInstance(context).tasks.size
+                        tableSizeNew = Model.getInstanceWC().getDataBaseDriver().getSizeAssignedTask(15)
+                        println(currentSize)
+                        println(tableSizeNew)
+
+                    }
+
+                    if (currentSize != tableSizeNew) {
+                        currentSize = tableSizeNew
+                        Model.getInstanceWC().clearTasks()
+                        Model.getInstanceWC().setTasks("assigned")
+                        println("Znaleziono zadanie")
+
+                        activity?.runOnUiThread {
+                            adapter.notifyDataSetChanged()
+                            println("Znaleziono zadanie")
+                        }
+                    }
+
+                }
+
+
+            }
+        }, delay, period)
+
+
 
         return (binding.root)
     }

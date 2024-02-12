@@ -163,7 +163,9 @@ public class Model {
         tasks_finished.add(0, task);
     }
 
-
+    public Client getClient() {
+        return client;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
