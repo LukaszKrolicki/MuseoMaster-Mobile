@@ -342,10 +342,11 @@ public class DataBaseDriver{
         Statement statement;
         ResultSet resultSet=null;
         int count = 0;
+        String status2 = "wTrackcie";
 
         try{
             statement=this.conn.createStatement();
-            resultSet = statement.executeQuery("SELECT COUNT(*) FROM zadanie2");
+            resultSet = statement.executeQuery("SELECT COUNT(*) FROM zadanie2 WHERE idPracownika='"+id+"' and status='"+status2+"';");
             if (resultSet.next()) {
                 count = resultSet.getInt(1);
             }

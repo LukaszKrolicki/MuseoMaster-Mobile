@@ -51,12 +51,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:tint="#FFC107"
-            android:src="@drawable/baseline_check_24" />
+            android:src="@drawable/baseline_question_mark_24" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="question"
+            android:text="Problem"
             android:textStyle="bold"
             android:textSize="12sp" />
 
