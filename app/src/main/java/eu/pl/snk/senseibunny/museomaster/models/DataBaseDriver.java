@@ -630,6 +630,7 @@ public class DataBaseDriver{
             statement.executeUpdate("UPDATE eksponat SET nazwaEksponatu = '"+nazwaZabytku+"', okresPowstania = '"+okresPowstania+"', tematyka = '"+tematyka+"', twórca = '"+tworca+"', aktualMiejscePrzech = '"+aktMiejscePrzechowywania+"', docMiejscePrzech = '"+docMiejcePrzech+"', opis = '"+opis+"' WHERE idEksponatu = '"+idZabytku+"';");
             editExhibitSuccessFlag = true;
         } catch (SQLException e) {
+            e.printStackTrace();
             editExhibitSuccessFlag = false;
         }
     }

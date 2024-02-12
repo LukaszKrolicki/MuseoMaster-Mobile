@@ -29,6 +29,7 @@ class ExhibitListFragment : Fragment() {
         runBlocking {
             withContext(Dispatchers.IO){
                 Model.getInstance(context).setExhibits()
+                Model.getInstance(context).setAllRooms()
                 exhibits = Model.getInstance(context).exhibits
             }
         }

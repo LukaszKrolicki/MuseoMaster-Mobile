@@ -22,6 +22,8 @@ public class Model {
     private final ArrayList<Exhibit> exhibits;
 
     private final ArrayList<Exhibition> exhibitions;
+
+    private final ArrayList<String> allRooms;
     ////////////////////////////////
 
     private Model(Context context) throws SQLException {
@@ -33,6 +35,7 @@ public class Model {
         //Curator
         this.exhibits = new ArrayList<>();
         this.exhibitions = new ArrayList<>();
+        this.allRooms = new ArrayList<>();
 
     }
 
@@ -149,6 +152,26 @@ public class Model {
                 Date dataRozpoczecia = resultSet.getDate("dataRozpoczecia");
                 Date dataZakonczenia = resultSet.getDate("dataZakonczenia");
                 exhibitions.add(new Exhibition(idWystawy, nazwaWystawy, sala, miejsceWykonania, tematyka, tworca, dataRozpoczecia, dataZakonczenia));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<String> getAllRooms() {
+        return allRooms;
+    }
+
+    public void setAllRooms() {
+        ResultSet resultSet = dataBaseDriver.getAllRoomsNames();
+
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("idSali");
+                Integer wielksc = resultSet.getInt("wielkość");
+                String nazwa = resultSet.getString("nazwa");
+                String typ = resultSet.getString("typ");
+                allRooms.add(nazwa);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

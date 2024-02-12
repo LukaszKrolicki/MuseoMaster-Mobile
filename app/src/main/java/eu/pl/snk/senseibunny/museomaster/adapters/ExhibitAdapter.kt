@@ -1,9 +1,12 @@
 package eu.pl.snk.senseibunny.museomaster.adapters
 
+import android.R
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -53,18 +56,26 @@ class ExhibitAdapter(private val exhibitsList: ArrayList<Exhibit>) : RecyclerVie
             val popupView: View = popupBinding.root
             val popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
 
+            val items = Model.getInstanceWC().allRooms
+            val adapter = ArrayAdapter(itemBinding.root.context, R.layout.simple_spinner_item, items)
             // Set the focusable property to true
             popupWindow.isFocusable = true
 
             // Set an OnTouchListener to consume touch events
             popupView.setOnTouchListener { _, _ -> true }
 
-            popupBinding.nameTextView.text = "Name:" + exhibit.nazwa_zabytku_tf
-            popupBinding.periodTextView.text = "Period:" + exhibit.okres_powstawnia_tf
-            popupBinding.TopicTextView.text = "Topic:" + exhibit.tematyka_tf
-            popupBinding.authorTextView.text = "Author:" + exhibit.tworca_tf
-            popupBinding.roomTextView.text = "Current Storage Room:" + exhibit.akt_miej_przech_tf
-            popupBinding.descTextView.text = "Description:" + exhibit.opis_ta
+            popupBinding.nameEt.setText(exhibit.nazwa_zabytku_tf)
+            popupBinding.periodEt.setText(exhibit.okres_powstawnia_tf)
+            popupBinding.topicEt.setText(exhibit.tematyka_tf)
+            popupBinding.authorEt.setText(exhibit.tworca_tf)
+            popupBinding.roomName.adapter = adapter
+
+            val valueToSelect = exhibit.akt_miej_przech_tf
+            if (adapter is ArrayAdapter<*>) {
+                val position = adapter.getPosition(valueToSelect)
+                popupBinding.roomName.setSelection(position)
+            }
+            popupBinding.descEt.setText(exhibit.opis_ta)
 
             popupBinding.closeButton.setOnClickListener {
                 popupWindow.dismiss()
@@ -83,10 +94,30 @@ class ExhibitAdapter(private val exhibitsList: ArrayList<Exhibit>) : RecyclerVie
                     }
                 }
             }
+            popupBinding.editButton.setOnClickListener {
+                runBlocking {
+                    withContext(Dispatchers.IO) {
+                        val id = exhibit.idZabytku
+                        val name = popupBinding.nameEt.text.toString()
+                        val intValue = popupBinding.periodEt.text.toString().toIntOrNull()
+                        val topic = popupBinding.topicEt.text.toString()
+                        val author = popupBinding.authorEt.text.toString()
+                        var spinner = popupBinding.roomName
+                        val roomName = spinner.selectedItem as String
+                        val desc = popupBinding.descEt.text.toString()
+                        Model.getInstanceWC().dataBaseDriver.editExhibit(
+                            id, name, intValue, topic, author, roomName, "null", desc
+                        )
+                    }
+                }
+
+            }
+
 
             // Show the popup window in the center of the screen
             popupWindow.showAtLocation(itemBinding.root, Gravity.CENTER, 0, 0)
 
         }
     }
+
 }

@@ -27,7 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:text="Name: " />
+            android:gravity="center"
+            android:text="Name:" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_et"
+            android:background="@drawable/text_edit"
+             />
 
     </LinearLayout>
 
@@ -52,6 +59,14 @@
             android:layout_marginHorizontal="15dp"
             android:text="Period: " />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/period_et"
+            android:background="@drawable/text_edit"
+            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +90,13 @@
             android:layout_height="wrap_content"
             android:text="Topic:" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topic_et"
+            android:background="@drawable/text_edit"
+            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -97,6 +119,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:text="Author:" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/author_et"
+            android:background="@drawable/text_edit"
+            />
 
     </LinearLayout>
 
@@ -118,8 +146,16 @@
             android:id="@+id/roomTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="2dp"
             android:text="Current Storage Room:" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:spinnerMode="dropdown"
+            android:id="@+id/room_name"
+            android:background="@drawable/text_edit"
+            />
 
     </LinearLayout>
     <LinearLayout
@@ -142,6 +178,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:text="Description:" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/desc_et"
+            android:background="@drawable/text_edit"
+            />
 
     </LinearLayout>
 
