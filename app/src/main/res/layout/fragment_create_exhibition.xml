@@ -213,6 +213,7 @@
                     android:padding="16dp" />
 
                 <ImageButton
+                    android:id="@+id/start_btn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
@@ -259,6 +260,7 @@
                     android:padding="16dp" />
 
                 <ImageButton
+                    android:id="@+id/end_btn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"

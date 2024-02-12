@@ -445,14 +445,15 @@ public class DataBaseDriver{
         return createExhibitionSuccessFlag;
     }
     public void createExhibition(String nazwaWystawy, String sala, String miejsceWykonania,
-                                 String tematyka, String tworca, LocalDate dataRozpoczecia, LocalDate dataZakonczenia){
+                                 String tematyka, String tworca, Date dataRozpoczecia, Date dataZakonczenia){
         Statement statement;
         try{
             statement = this.conn.createStatement();
-            createExhibitionSuccessFlag = true;
             statement.executeUpdate("INSERT INTO wystawa (nazwaWystawy, sala, miejsceWykonania, tematyka, tworca, dataRozpoczecia , dataZakonczenia) " +
                     "VALUES ('"+nazwaWystawy+"','"+sala+"','"+miejsceWykonania+"','"+tematyka+"','"+tworca+"', '"+dataRozpoczecia+"', '"+dataZakonczenia+"');");
+            createExhibitionSuccessFlag = true;
         } catch (SQLException e) {
+            e.printStackTrace();
             createExhibitionSuccessFlag = false;
         }
     }
