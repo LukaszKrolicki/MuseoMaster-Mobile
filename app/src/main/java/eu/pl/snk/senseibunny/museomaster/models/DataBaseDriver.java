@@ -380,9 +380,9 @@ public class DataBaseDriver{
         Statement statement;
         try{
             statement = this.conn.createStatement();
-            createExhibitSuccessFlag = true;
             statement.executeUpdate("INSERT INTO eksponat (nazwaEksponatu, okresPowstania, tematyka, twórca, aktualMiejscePrzech, docMiejscePrzech , opis) " +
                     "VALUES ('"+nazwaZabytku+"','"+okresPowstania+"','"+tematyka+"','"+tworca+"','"+aktMiejscePrzechowywania+"', '"+docMiejcePrzech+"', '"+opis+"');");
+            createExhibitSuccessFlag = true;
         } catch (SQLException e) {
             createExhibitSuccessFlag = false;
         }

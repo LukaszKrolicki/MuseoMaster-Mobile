@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(this, NormalWorkerActivity::class.java)
+            val intent = Intent(this, CuratorActivity::class.java)
             startActivity(intent)
         }
     }
