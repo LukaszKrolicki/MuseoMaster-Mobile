@@ -29,6 +29,7 @@ class CreateExhibitionFragment : Fragment() {
         binding = FragmentCreateExhibitionBinding.inflate(inflater, container, false)
         runBlocking {
             withContext(Dispatchers.IO){
+                Model.getInstance(context).clearRooms()
                 Model.getInstance(context).setRoom()
                 val rooms = Model.getInstance(context).rooms
                 val adapter: ArrayAdapter<String?> = ArrayAdapter<String?>(requireContext(), android.R.layout.simple_spinner_item, rooms)

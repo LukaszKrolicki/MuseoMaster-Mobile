@@ -1,6 +1,7 @@
 package eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers
 
 import android.os.Bundle
+import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class ExhibitionsListFragment : Fragment() {
         binding = FragmentExhibitionsListBinding.inflate(inflater, container, false)
         runBlocking {
             withContext(Dispatchers.IO){
+                Model.getInstance(context).clearExhibitions()
                 Model.getInstance(context).setExhibitions()
                 exhibitions = Model.getInstance(context).exhibitions
             }

@@ -28,6 +28,8 @@ class ExhibitListFragment : Fragment() {
         binding = FragmentExhibitListBinding.inflate(inflater, container, false)
         runBlocking {
             withContext(Dispatchers.IO){
+                Model.getInstance(context).clearExhibitList()
+                Model.getInstance(context).clearAllRooms()
                 Model.getInstance(context).setExhibits()
                 Model.getInstance(context).setAllRooms()
                 exhibits = Model.getInstance(context).exhibits

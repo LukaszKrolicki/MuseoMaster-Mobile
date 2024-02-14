@@ -27,12 +27,11 @@ public class Model {
 
     //Curator
     private final ArrayList<Exhibit> exhibits;
-
     private final ArrayList<Exhibition> exhibitions;
-
     private final ArrayList<String> allRooms;
-
     private final ArrayList<String> rooms;
+    private final ArrayList<Exhibit> exhibitsSearched;
+    private boolean setSearchedExhibitsSuccessFlag;
     ////////////////////////////////
 
 
@@ -57,7 +56,8 @@ public class Model {
         this.exhibitions = new ArrayList<>();
         this.allRooms = new ArrayList<>();
         this.rooms = new ArrayList<>();
-
+        this.exhibitsSearched = new ArrayList<>();
+        setSearchedExhibitsSuccessFlag = false;
         //Normal worker
         this.tasks = new ArrayList<Task>();
         this.tasks_finished=new ArrayList<Task>();
@@ -199,12 +199,24 @@ public class Model {
         }
     }
 
-
+    public void clearExhibitList(){
+        exhibits.clear();
+    }
+    public void clearExhibitions(){
+        exhibitions.clear();
+    }
+    public void clearSearchedExhibits(){
+        exhibitsSearched.clear();
+    }
+    public void clearAllRooms(){
+        allRooms.clear();
+    }
+    public void clearRooms(){
+        rooms.clear();
+    }
     public ArrayList<Exhibit> getExhibits() {
         return exhibits;
     }
-
-
     public ArrayList<Exhibition> getExhibitions() {
         return exhibitions;
     }
@@ -263,6 +275,68 @@ public class Model {
                 rooms.add(nazwa);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Exhibit> getExhibitsSearched() {return exhibitsSearched;}
+
+    public boolean isSetSearchedExhibitsSuccessFlag() {return setSearchedExhibitsSuccessFlag;}
+
+    public void setExhibitsSearched(String nazwa, String autor, String topic, Integer rok1, Integer rok2, String
+            miejsce) {
+        ResultSet resultSet;
+        if (!Objects.equals(nazwa, "")) {
+            resultSet = dataBaseDriver.getExhibitByName(nazwa);
+        } else {
+            if (!Objects.equals(topic, "")) {
+                resultSet = dataBaseDriver.getExhibitByTopic(topic);
+            } else {
+                if (!Objects.equals(autor, "")) {
+                    resultSet = dataBaseDriver.getExhibitByAuthor(autor);
+                } else {
+                    if (rok1 == 10000 && rok2 != 10000) {
+                        resultSet = dataBaseDriver.getExhibitBySecYear(rok2);
+                    }
+                    else if (rok2 == 10000 && rok1 != 10000) {
+                        resultSet = dataBaseDriver.getExhibitByFirstYear(rok1);
+                    }
+                    else if (rok1 != 10000 && rok2 != 10000) {
+                        resultSet = dataBaseDriver.getExhibitByYears(rok1, rok2);
+                    }
+                    else {
+                        if (!Objects.equals(miejsce, "null")) {
+                            resultSet = dataBaseDriver.getExhibitByPlace(miejsce);
+                            System.out.println(miejsce);
+                        }
+                        else {
+                            System.out.println("DUPOA");
+                            resultSet = dataBaseDriver.getExhibitByYears(-1000000, 2024);
+                        }
+                    }
+                }
+            }
+        }
+
+        try {
+            while (resultSet.next()) {
+                Integer idZabytku = resultSet.getInt("idEksponatu");
+                String nazwaEksponatu = resultSet.getString("nazwaEksponatu");
+                String okresPowstania = resultSet.getString("okresPowstania");
+                String tematyka = resultSet.getString("tematyka");
+                String tworca = resultSet.getString("twórca");
+                String aktualMiejscePrzech = resultSet.getString("aktualMiejscePrzech");
+                String opis = resultSet.getString("opis");
+                Integer WystawaidWystawy = resultSet.getInt("WystawaidWystawy");
+                Integer ZadanieidZadania = resultSet.getInt("ZadanieidZadania");
+                Integer SalaidSali = resultSet.getInt("SalaidSali");
+                Integer ZadaniePracownikidPracownika = resultSet.getInt("ZadaniePracownikidPracownika");
+                exhibitsSearched.add(new Exhibit(idZabytku, nazwaEksponatu, okresPowstania, tematyka, tworca, aktualMiejscePrzech, opis,
+                        WystawaidWystawy, ZadanieidZadania, SalaidSali, ZadaniePracownikidPracownika,""));
+            }
+            setSearchedExhibitsSuccessFlag = true;
+        } catch (SQLException e) {
+            setSearchedExhibitsSuccessFlag = false;
             throw new RuntimeException(e);
         }
     }

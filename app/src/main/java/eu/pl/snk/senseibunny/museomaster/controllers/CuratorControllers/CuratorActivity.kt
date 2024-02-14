@@ -15,7 +15,7 @@ import eu.pl.snk.senseibunny.museomaster.databinding.ActivityCuratorBinding
 
 class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private  lateinit var fragmentManage: FragmentManager
+    private lateinit var fragmentManage: FragmentManager
     private lateinit var binding : ActivityCuratorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,6 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             R.id.exhibit_list -> {openFragment(ExhibitListFragment())}
             R.id.search_exhibit -> {openFragment(SearchExhibitFragment())}
             R.id.nav_bugs -> {openFragment(BugFragment())}
-
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

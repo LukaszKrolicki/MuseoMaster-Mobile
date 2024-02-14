@@ -24,6 +24,7 @@ class AddExhibitFragment : Fragment() {
         binding = FragmentAddExhibitBinding.inflate(inflater, container, false)
         runBlocking {
             withContext(Dispatchers.IO) {
+                Model.getInstance(context).clearAllRooms()
                 Model.getInstance(context).setAllRooms()
                 val rooms = Model.getInstance(context).allRooms
                 val adapter: ArrayAdapter<String?> =
