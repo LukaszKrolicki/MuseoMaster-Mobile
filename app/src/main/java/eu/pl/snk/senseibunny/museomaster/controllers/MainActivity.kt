@@ -9,11 +9,13 @@ import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.CuratorActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.NormalWorkerControllers.NormalWorkerActivity
+import eu.pl.snk.senseibunny.museomaster.controllers.PermissionWorkerControllers.PermissionWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
 import eu.pl.snk.senseibunny.museomaster.models.Model
 import java.security.NoSuchAlgorithmException
+import java.security.Permission
 import javax.net.ssl.SSLContext
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +49,9 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(this, CuratorActivity::class.java)
+
+            val intent = Intent(this, PermissionWorkerActivity::class.java)
+
             startActivity(intent)
         }
     }
