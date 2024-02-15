@@ -54,7 +54,7 @@ class TaskListFragment : Fragment() {
                     // Launch a coroutine in the IO dispatcher
                     withContext(Dispatchers.IO) {
                         currentSize = tasks.size
-                        tableSizeNew = Model.getInstanceWC().getDataBaseDriver().getSizeAssignedTask(42)
+                        tableSizeNew = Model.getInstanceWC().getDataBaseDriver().getSizeAssignedTask(13)
                         println("przed"+currentSize)
                         println("po"+tableSizeNew)
 

@@ -26,9 +26,14 @@ public class Model {
 
     ////////////////////////////////////////////////
 
+    //Pracownik+
+    private final ArrayList<Task> tasksAssignedTo;
+
+    ////////////////////////////////////////////////////////////////
+
     private Model(Context context) throws SQLException {
 
-        this.client = new Client(42, "", "", "", 0, 0, "x", 0, "x");
+        this.client = new Client(13, "", "", "", 0, 0, "x", 0, "@ll185");
 
         //Admin
         this.dataBaseDriver = new DataBaseDriver(context);
@@ -38,6 +43,10 @@ public class Model {
         //Normal worker
         this.tasks = new ArrayList<Task>();
         this.tasks_finished=new ArrayList<Task>();
+
+        //Worker+
+        this.tasksAssignedTo = new ArrayList<Task>();
+
 
     }
 
@@ -140,7 +149,7 @@ public class Model {
                 if (Objects.equals(type, "assigned")) {
                     tasks.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
                 } else if (Objects.equals(type, "assignedTo")) {
-                    //tasksAssignedTo.add(0, new Zadanie(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
+                    tasksAssignedTo.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
                 } else {
                     tasks_finished.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
                 }
@@ -166,6 +175,17 @@ public class Model {
     public Client getClient() {
         return client;
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //Worker+ ****************************************************************
+
+    public ArrayList<Task> getAssignedToTasks() {
+        return tasksAssignedTo;
+    }
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

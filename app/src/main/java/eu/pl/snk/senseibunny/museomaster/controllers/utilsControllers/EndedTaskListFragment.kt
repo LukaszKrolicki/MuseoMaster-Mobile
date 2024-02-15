@@ -31,7 +31,7 @@ class EndedTaskListFragment : Fragment() {
             // Launch a coroutine in the IO dispatcher
             withContext(Dispatchers.IO) {
                 Model.getInstanceWC().clearFinishedTasks()
-                Model.getInstance(context).setTasks("x")
+                Model.getInstance(context).setTasks("finished")
                 finishedTasks = Model.getInstance(context).fishedTasks
             }
         }
