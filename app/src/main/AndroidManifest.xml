@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MuseoMaster"
         tools:targetApi="31">
         <activity
+            android:name=".TechnicalWorkerActivity"
+            android:exported="false" />
+        <activity
             android:name=".controllers.utilsControllers.ExhibitTaskAdd"
             android:exported="false" />
         <activity

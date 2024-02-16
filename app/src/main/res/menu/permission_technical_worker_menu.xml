@@ -24,37 +24,21 @@
             android:id="@+id/AssignTask"
             android:title="Assign Task"
             android:icon="@drawable/baseline_assignment_add_24" />
-
         <item
-            android:id="@+id/nav_create_exh"
-            android:title="Create Exhibition"
-            android:icon="@drawable/baseline_add_to_queue_24" />
-        <item
-            android:id="@+id/nav_exh_list"
-            android:title="Exhibitions List"
-            android:icon="@drawable/baseline_format_list_bulleted_24" />
-        <item
-            android:id="@+id/add_exhibit"
-            android:title="Add Exhibit"
-            android:icon="@drawable/baseline_playlist_add_24" />
-        <item
-            android:id="@+id/exhibit_list"
+            android:id="@+id/ExhibitsList"
             android:title="Exhibits List"
             android:icon="@drawable/baseline_list_24" />
-        <item
-            android:id="@+id/search_exhibit"
-            android:title="Search Exhibit"
-            android:icon="@drawable/baseline_search_24" />
-        <item
-            android:id="@+id/nav_bugs"
-            android:title="Bug reports"
-            android:icon="@drawable/baseline_bug_report_24" />
 
 
     </group>
 
     <group  android:checkableBehavior="single"
         android:id="@+id/bottom">
+        <item
+            android:id="@+id/bug"
+            android:title="Report a bug"
+            android:icon="@drawable/baseline_bug_report_24" />
+
         <item
             android:id="@+id/logout"
             android:title="Logout"

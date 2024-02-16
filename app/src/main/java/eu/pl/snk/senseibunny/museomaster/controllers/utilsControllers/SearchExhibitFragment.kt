@@ -1,4 +1,4 @@
-package eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers
+package eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import eu.pl.snk.senseibunny.museomaster.R
+import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.SearchedExhibitsFragment
 import eu.pl.snk.senseibunny.museomaster.databinding.FragmentSearchExhibitBinding
 import eu.pl.snk.senseibunny.museomaster.models.Model
 import kotlinx.coroutines.Dispatchers
