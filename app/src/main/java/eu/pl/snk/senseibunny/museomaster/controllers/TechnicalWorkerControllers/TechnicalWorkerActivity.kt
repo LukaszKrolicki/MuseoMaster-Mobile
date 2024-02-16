@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.BugFragment
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.EndedTaskListFragment
+import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.ExhibitsAssignedFragment
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.TaskListFragment
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityTechnicalWorkerBinding
 
@@ -40,7 +41,7 @@ class TechnicalWorkerActivity : AppCompatActivity(), NavigationView.OnNavigation
 
             R.id.taskList -> {openFragment(TaskListFragment())}
             R.id.taskFinished -> {openFragment(EndedTaskListFragment())}
-            R.id.ExhibitsList -> {}
+            R.id.ExhibitsList -> {openFragment(ExhibitsAssignedFragment())}
             R.id.bug -> {openFragment(BugFragment())}
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)

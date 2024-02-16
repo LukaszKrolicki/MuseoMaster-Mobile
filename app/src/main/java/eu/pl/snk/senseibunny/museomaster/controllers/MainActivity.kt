@@ -10,6 +10,7 @@ import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActiv
 import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.CuratorActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.NormalWorkerControllers.NormalWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.PermissionWorkerControllers.PermissionWorkerActivity
+import eu.pl.snk.senseibunny.museomaster.controllers.TechnicalWorkerControllers.TechnicalWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
 
-            val intent = Intent(this, CuratorActivity::class.java)
+            val intent = Intent(this, TechnicalWorkerActivity::class.java)
 
             startActivity(intent)
         }
