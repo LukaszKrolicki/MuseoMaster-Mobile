@@ -1,4 +1,4 @@
-package eu.pl.snk.senseibunny.museomaster.controllers.TechnicalWorkerControllers
+package eu.pl.snk.senseibunny.museomaster.controllers.PermissionTechWorker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,19 +10,16 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import eu.pl.snk.senseibunny.museomaster.R
-import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.BugFragment
-import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.EndedTaskListFragment
-import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.ExhibitsAssignedFragment
-import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.TaskListFragment
-import eu.pl.snk.senseibunny.museomaster.databinding.ActivityTechnicalWorkerBinding
+import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.*
+import eu.pl.snk.senseibunny.museomaster.databinding.ActivityPermissionTechnicalWorkerBinding
 
-class TechnicalWorkerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class PermissionTechnicalWorkerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var fragmentManage: FragmentManager
-    private lateinit var binding: ActivityTechnicalWorkerBinding
+    private lateinit var binding: ActivityPermissionTechnicalWorkerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTechnicalWorkerBinding.inflate(layoutInflater)
+        binding = ActivityPermissionTechnicalWorkerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
@@ -33,13 +30,14 @@ class TechnicalWorkerActivity : AppCompatActivity(), NavigationView.OnNavigation
         fragmentManage = supportFragmentManager
         openFragment(TaskListFragment())
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.taskList -> {openFragment(TaskListFragment())}
             R.id.taskFinished -> {openFragment(EndedTaskListFragment())}
+            R.id.taskAssignedTo -> {openFragment(AssignedToListFragment())}
+            R.id.AssignTask -> {openFragment(UserSearchFragment())}
             R.id.ExhibitsList -> {openFragment(ExhibitsAssignedFragment())}
             R.id.bug -> {openFragment(BugFragment())}
         }
