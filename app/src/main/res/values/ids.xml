@@ -5,4 +5,5 @@
     <item name="usernameLinearLayout" type="id" />
     <item name="passwordLinearLayout" type="id" />
     <item name="loginButton" type="id" />
+    <item name="fragmentContainer" type="id" />
 </resources>

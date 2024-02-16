@@ -30,11 +30,11 @@ class AssignedToListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAssignedToListBinding.inflate(inflater, container, false)
-
+        Model.getInstance(context)
         runBlocking {
             // Launch a coroutine in the IO dispatcher
             withContext(Dispatchers.IO) {
-                Model.getInstanceWC().clearFinishedTasks()
+                Model.getInstance(context).clearFinishedTasks()
                 Model.getInstanceWC().setTasks("assignedTo")
                 assignedTasks = Model.getInstance(context).assignedToTasks
                 println(assignedTasks.toString())

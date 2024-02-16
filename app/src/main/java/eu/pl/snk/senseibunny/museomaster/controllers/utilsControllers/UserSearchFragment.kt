@@ -26,7 +26,11 @@ class UserSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserSearchBinding.inflate(inflater, container, false)
-        Model.getInstanceWC().clearWorkersAssigned()
+        Model.getInstance(context)
+        if(Model.getInstanceWC().workersAssigned.isNotEmpty()){
+            Model.getInstanceWC().clearWorkersAssigned()
+        }
+
 
         val positions =
             arrayOf("", "Worker", "Worker+", "Technical Worker", "Technical Worker+", "Curator")
