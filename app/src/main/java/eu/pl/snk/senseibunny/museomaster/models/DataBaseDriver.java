@@ -181,41 +181,45 @@ public class DataBaseDriver{
 
     //Pracownik +
     ////////////////////////////////////////////////////////////////////////
-//    public ResultSet getWorkerData(String Input, String rola){
-//        Statement statement;
-//        ResultSet resultSet = null;
-//        String imie = null;
-//        String nazwisko = null;
-//
-//        try{
-//            if (Input.contains(" ")) {
-//                String[] words = Input.split(" ");
-//                imie=words[0];
-//                nazwisko=words[1];
-//            }
-//        } catch (RuntimeException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//
-//        try{
-//            statement=this.conn.createStatement();
-//            if(Input.isBlank() && rola!=null && !rola.isBlank()){
-//                resultSet=statement.executeQuery("SELECT * FROM pracownik WHERE rola='"+rola+"';");
-//            }
-//            else if (Input.contains(" ")){
-//                resultSet=statement.executeQuery("SELECT * FROM pracownik WHERE imie='"+imie+"' AND nazwisko='"+nazwisko+"';");
-//            }
-//            else{
-//                resultSet=statement.executeQuery("SELECT * FROM pracownik WHERE nazwaUżytkownika ='"+Input+"'");
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return resultSet;
-//    }
+    public ResultSet getWorkerData(String Input, String rola){
+        Statement statement;
+        ResultSet resultSet = null;
+        String imie = null;
+        String nazwisko = null;
+
+        try{
+            if (Input.contains(" ")) {
+                String[] words = Input.split(" ");
+                imie=words[0];
+                nazwisko=words[1];
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        try {
+            if (Input.trim().isEmpty()) {
+                if (rola != null && !rola.trim().isEmpty()) {
+                    statement = this.conn.createStatement();
+                    resultSet = statement.executeQuery("SELECT * FROM pracownik WHERE rola='" + rola + "';");
+                }
+            } else if (Input != null && Input.contains(" ")) {
+                String[] words = Input.split(" ");
+                imie = words[0];
+                nazwisko = words[1];
+                statement = this.conn.createStatement();
+                resultSet = statement.executeQuery("SELECT * FROM pracownik WHERE imie='" + imie + "' AND nazwisko='" + nazwisko + "';");
+            } else {
+                statement = this.conn.createStatement();
+                resultSet = statement.executeQuery("SELECT * FROM pracownik WHERE nazwaUżytkownika ='" + Input + "'");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultSet;
+    }
 
     public void createTask(Integer idPracownika, String opis, String temat, java.sql.Date dataRozpoczecia, java.sql.Date dataZakonczenia, String nazwaNadajacego, String nazwaUzytkownika){
         String status = "wTrackcie";

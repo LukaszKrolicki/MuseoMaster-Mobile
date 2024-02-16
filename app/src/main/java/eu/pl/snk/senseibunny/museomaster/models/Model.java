@@ -45,6 +45,8 @@ public class Model {
     //Pracownik+
     private final ArrayList<Task> tasksAssignedTo;
 
+    private final ArrayList<Client> workersAssigned;
+
     ////////////////////////////////////////////////////////////////
 
     private Model(Context context) throws SQLException {
@@ -69,6 +71,7 @@ public class Model {
 
         //Worker+
         this.tasksAssignedTo = new ArrayList<Task>();
+        this.workersAssigned = new ArrayList<Client>();
 
 
     }
@@ -378,6 +381,142 @@ public class Model {
     public ArrayList<Task> getAssignedToTasks() {
         return tasksAssignedTo;
     }
+
+    public void setWorkers(String Input, String rolaa) {
+        ResultSet resultSet = dataBaseDriver.getWorkerData(Input, rolaa);
+
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("idPracownika");
+                String imie = resultSet.getString("imie");
+                String nazwisko = resultSet.getString("nazwisko");
+                String nazwaUzytkownika = resultSet.getString("nazwaUżytkownika");
+                String email = resultSet.getString("e-mail");
+                Integer nrTelefonu = resultSet.getInt("nrTelefonu");
+                Integer wiek = resultSet.getInt("wiek");
+                Integer uprawniony = resultSet.getInt("czyUprawniony");
+                String rola = resultSet.getString("rola");
+                clients.add(new Client(id, imie, nazwisko, email, wiek, uprawniony, rola, nrTelefonu, nazwaUzytkownika));
+                System.out.println(clients);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void clearWorkers() {
+        clients.clear();
+    }
+
+    public void assignWorker(Client client) {
+        workersAssigned.add(client);
+        System.out.println(workersAssigned);
+    }
+
+    public void removeWorker(Client client) {
+        workersAssigned.remove(client);
+        System.out.println(workersAssigned);
+    }
+
+    public ArrayList<Client> getWorkersAssigned() {
+        return workersAssigned;
+    }
+
+    public void clearWorkersAssigned() {
+        workersAssigned.clear();
+    }
+
+    public void clearAssignedTasks() {
+        tasksAssignedTo.clear();
+    }
+
+    public void addTaskAssignedTo(Task task) {
+        tasksAssignedTo.add(0, task);
+    }
+
+//    public void assignEx(Exhibit ex) {
+//        exAssigned.add(ex);
+//        System.out.println(exAssigned);
+//    }
+//
+//    public void removeEx(Exhibit ex) {
+//        exAssigned.remove(ex);
+//        System.out.println(exAssigned);
+//    }
+
+//    public void clearEx(){
+//        exAssigned.clear();
+//    }
+
+//    public ObservableList<Exhibit> getExAssigned() {
+//        return exAssigned;
+//    }
+
+
+//    public void setAssignedToTaskLV(ListView x) {
+//        assigned_task_to_listview = x;
+//    }
+//
+//    public void refreshAssignedToTaskLV() {
+//        assigned_task_to_listview.refresh();
+//    }
+
+    public void updateAssignedTasks(String type) {
+        ResultSet resultSet;
+        if (Objects.equals(type, "assigned")) {
+            resultSet = dataBaseDriver.getAssignedTask(client.getIdPracownika());
+        } else if (Objects.equals(type, "assignedTo")) {
+            resultSet = dataBaseDriver.getAssignedTaskToLv(client.getNazwaUzytkownika());
+        } else {
+            resultSet = dataBaseDriver.getFinishedTask(client.getIdPracownika());
+        }
+
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("idZadania");
+                String temat = resultSet.getString("temat");
+                String opis = resultSet.getString("opis");
+                String dataRozpoczecia = resultSet.getDate("dataRozpoczęcia").toString();
+                String dataZakonczenia = resultSet.getDate("dataZakończenia").toString();
+                String status = resultSet.getString("status");
+                Integer idPracownika = resultSet.getInt("idPracownika");
+                String nazwaUzytkownikaNadajacego = resultSet.getString("nazwaNadajacego");
+                String nazwaUzytkownika = resultSet.getString("nazwaUzytkownika");
+                if (Objects.equals(type, "assigned")) {
+                    tasks.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
+                } else if (Objects.equals(type, "assignedTo")) {
+                    tasksAssignedTo.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
+                } else {
+                    tasks_finished.add(0, new Task(id, temat, opis, dataRozpoczecia, dataZakonczenia, status, idPracownika, nazwaUzytkownikaNadajacego, nazwaUzytkownika));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    String desc;
+    String subject;
+    java.sql.Date starDate;
+    java.sql.Date endDate;
+
+    public void setTaskVars(String desc, String subject, java.sql.Date starDate, java.sql.Date endDate) {
+        this.desc = desc;
+        this.subject = subject;
+        this.starDate = starDate;
+        this.endDate = endDate;
+    }
+
+    public void changeDesc(String x){
+        desc=x.concat(":  "+desc);
+        System.out.println(desc);
+    }
+    public void createTask(Integer idPracownika, String nazwaUzytkownia, String nazwaNadajacego) {
+
+        dataBaseDriver.createTask(idPracownika, desc, subject, starDate, endDate, nazwaNadajacego, nazwaUzytkownia);
+    }
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////

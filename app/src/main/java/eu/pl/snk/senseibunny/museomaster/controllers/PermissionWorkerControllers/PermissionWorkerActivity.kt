@@ -1,5 +1,6 @@
 package eu.pl.snk.senseibunny.museomaster.controllers.PermissionWorkerControllers
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -12,10 +13,13 @@ import com.google.android.material.navigation.NavigationView
 import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.AssignedToListFragment
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.BugFragment
+import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.DetailAndAddTask
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.EndedTaskListFragment
 import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.TaskListFragment
+import eu.pl.snk.senseibunny.museomaster.controllers.utilsControllers.UserSearchFragment
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityNormalWorkerBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityPermissionWorkerBinding
+import eu.pl.snk.senseibunny.museomaster.models.Model
 
 class PermissionWorkerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private  lateinit var fragmentManage: FragmentManager
@@ -34,6 +38,7 @@ class PermissionWorkerActivity : AppCompatActivity(), NavigationView.OnNavigatio
         openFragment(TaskListFragment())
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
 
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -44,6 +49,7 @@ class PermissionWorkerActivity : AppCompatActivity(), NavigationView.OnNavigatio
             R.id.taskFinished-> {openFragment(EndedTaskListFragment())}
             R.id.bug->{openFragment(BugFragment())}
             R.id.taskAssignedTo->{openFragment(AssignedToListFragment())}
+            R.id.AssignTask->{openFragment(UserSearchFragment())}
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
