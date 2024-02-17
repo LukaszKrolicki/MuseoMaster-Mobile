@@ -97,6 +97,7 @@ class DetailAndAddTask : AppCompatActivity() {
             Date(utilDate.time)
         } catch (e: Exception) {
             null
+            //xd
         }
     }
 
