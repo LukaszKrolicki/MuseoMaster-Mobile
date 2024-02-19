@@ -36,8 +36,10 @@ class MuseumClientActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.ExhibitsList -> {openFragment(ExhibitListClientFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
+
         return true
     }
     override fun onBackPressed() {

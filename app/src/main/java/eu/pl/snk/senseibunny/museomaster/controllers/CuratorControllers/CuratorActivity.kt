@@ -45,6 +45,7 @@ class CuratorActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             R.id.exhibit_list -> {openFragment(ExhibitListFragment())}
             R.id.search_exhibit -> {openFragment(SearchExhibitFragment())}
             R.id.nav_bugs -> {openFragment(BugFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

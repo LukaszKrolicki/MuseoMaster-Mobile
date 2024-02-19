@@ -44,7 +44,7 @@ class ClientAdapter(private val clientList: ArrayList<Client>) : RecyclerView.Ad
         }
         fun bind(client: Client) {
             nameTextView.text = client.getNazwaUzytkownika()
-            emailTextView.text = client.emailPracownikaProperty()
+            emailTextView.text = client.emailPracownika
             itemBinding.work.text = client.rola
 
         }
@@ -60,9 +60,9 @@ class ClientAdapter(private val clientList: ArrayList<Client>) : RecyclerView.Ad
             // Set an OnTouchListener to consume touch events
             popupView.setOnTouchListener { _, _ -> true }
 
-            popupBinding.name1TextView.text = "Name: "+client.imiePracownikaProperty()
+            popupBinding.name1TextView.text = "Name: "+client.imiePracownika
             popupBinding.name2TextView.text = "Second name: "+client.nazwaUzytkownika
-            popupBinding.ageTextView.text = "Age: "+ client.wiekPracownikaProperty().toString()
+            popupBinding.ageTextView.text = "Age: "+ client.wiekPracownika.toString()
             popupBinding.phoneNumberTextView.text="Phone number: "+ client.nrTelefonu.toString()
             popupBinding.roleTextView.text="Position: " + client.rola
 

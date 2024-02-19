@@ -18,6 +18,8 @@ public class Model {
 
     private Client client;
 
+    private boolean ClientLoginSuccessFlag;
+
     //Admin
     private final ArrayList<Client> clients;
 
@@ -55,7 +57,7 @@ public class Model {
 
     private Model(Context context) throws SQLException {
 
-        this.client = new Client(13, "", "", "", 0, 0, "x", 0, "@ll185");
+        this.client = new Client(0, "", "", "", 0, 0, "x", 0, "x");
 
         //Admin
         this.dataBaseDriver = new DataBaseDriver(context);
@@ -522,6 +524,74 @@ public class Model {
     }
 
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //Login Section ****************************************************************
+//    public boolean getClientLoginFlag() {
+//        return ClientLoginSuccessFlag;
+//    }
+//
+//    public void setClientLoginFlag(boolean flag) {
+//        this.ClientLoginSuccessFlag = flag;
+//    }
+//
+//    public void setNormalClientLoginSuccess(boolean flag) {
+//        this.NormalClientLoginSuccessFlag = flag;
+//    }
+//
+//    public boolean getNornalClientLoginSuccess() {
+//        return this.NormalClientLoginSuccessFlag;
+//    }
+
+
+    //Client Section
+    ////////////////////////////////////////////////////////////////
+
+        public boolean getClientLoginFlag(){
+            return ClientLoginSuccessFlag;
+        }
+
+        public void setClientLoginFlag(boolean flag){
+            this.ClientLoginSuccessFlag = flag;
+        }
+
+
+
+        public void evaluateClient(String username, String password, String rola){
+            ResultSet resultSet = dataBaseDriver.getClientData(username,password,rola);
+            try{
+                if(resultSet.next()){
+                    //
+                    // System.out.println("rep1");
+                    this.client.setIdPracownika(resultSet.getInt("idPracownika"));
+                    this.client.setImiePracownika(resultSet.getString("imie"));
+                    this.client.setNazwiskoPracownika(resultSet.getString("nazwisko"));
+                    this.client.setNazwaUzytkownika(resultSet.getString("nazwaUżytkownika"));
+                    this.client.setEmailPracownika(resultSet.getString("e-mail"));
+                    this.client.setNrTelefonu(resultSet.getInt("nrTelefonu"));
+                    this.client.setWiekPracownika(resultSet.getInt("wiek"));
+                    this.client.setCzyUprawniony(resultSet.getInt("czyUprawniony"));
+                    this.client.setRola(resultSet.getString("rola"));
+                    this.setClientLoginFlag(true);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+    public void evaluateNormalUser(String username, String password) {
+        ResultSet resultSet = dataBaseDriver.getNormalClientData(username, password);
+        try{
+            if(resultSet.next()){
+                this.setClientLoginFlag(true);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 

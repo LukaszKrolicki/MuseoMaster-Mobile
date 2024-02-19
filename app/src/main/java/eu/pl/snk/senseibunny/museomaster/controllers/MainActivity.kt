@@ -2,6 +2,7 @@ package eu.pl.snk.senseibunny.museomaster.controllers
 
 import android.content.Intent
 import android.graphics.Color
+import android.media.audiofx.DynamicsProcessing.Stage
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,10 +11,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.security.ProviderInstaller
-
-import eu.pl.snk.senseibunny.museomaster.R
 import eu.pl.snk.senseibunny.museomaster.controllers.AdminControllers.AdminActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.CuratorControllers.CuratorActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.MuseumClientControllers.MuseumClientActivity
@@ -21,23 +19,20 @@ import eu.pl.snk.senseibunny.museomaster.controllers.NormalWorkerControllers.Nor
 import eu.pl.snk.senseibunny.museomaster.controllers.PermissionTechWorker.PermissionTechnicalWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.PermissionWorkerControllers.PermissionWorkerActivity
 import eu.pl.snk.senseibunny.museomaster.controllers.TechnicalWorkerControllers.TechnicalWorkerActivity
-import eu.pl.snk.senseibunny.museomaster.databinding.ActivityAdminBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.ActivityMainBinding
-import eu.pl.snk.senseibunny.museomaster.databinding.CustomReportPopupBinding
 import eu.pl.snk.senseibunny.museomaster.databinding.UserCreatePopupBinding
 import eu.pl.snk.senseibunny.museomaster.models.DataBaseDriver
 import eu.pl.snk.senseibunny.museomaster.models.Model
-import eu.pl.snk.senseibunny.museomaster.models.Report
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import java.security.NoSuchAlgorithmException
-import java.security.Permission
 import javax.net.ssl.SSLContext
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dataBaseDriver: DataBaseDriver
     private lateinit var binding: ActivityMainBinding
+    var i=0;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -67,9 +62,51 @@ class MainActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
 
-            val intent = Intent(this, PermissionTechnicalWorkerActivity::class.java)
-
-            startActivity(intent)
+            val posList = listOf("Admin", "Pracownik", "Pracownik+", "Pracownik Techniczny", "Pracownik Techniczny+", "Kurator")
+            if(checkCred("Admin")){
+                val intent = Intent(this, AdminActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else if(checkCred("Pracownik")){
+                val intent = Intent(this, NormalWorkerActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else if(checkCred("Pracownik+")){
+                val intent = Intent(this, PermissionWorkerActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else if(checkCred("Pracownik Techniczny")){
+                val intent = Intent(this, TechnicalWorkerActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else if(checkCred("Pracownik Techniczny+")){
+                val intent = Intent(this, PermissionTechnicalWorkerActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else if(checkCred("Kurator")){
+                val intent = Intent(this,CuratorActivity::class.java)
+                Model.getInstanceWC().clientLoginFlag=false
+                binding.error.setText("")
+                startActivity(intent)
+            }
+            else{
+                if(checkNormalUserCred()){
+                    val intent = Intent(this,MuseumClientActivity::class.java)
+                    Model.getInstanceWC().clientLoginFlag=false
+                    binding.error.setText("")
+                    startActivity(intent)
+                }
+            }
         }
 
         binding.CreateButton.setOnClickListener{
@@ -77,6 +114,47 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkCred(rola: String): Boolean {
+
+        runBlocking {
+            withContext(Dispatchers.IO) {
+
+                Model.getInstanceWC().evaluateClient(binding.usernameEditText.text.toString(), binding.passwordEditText.text.toString(), rola)
+                println(Model.getInstanceWC().getClientLoginFlag())
+            }
+        }
+
+
+        return if (Model.getInstanceWC().getClientLoginFlag()) {
+            binding.usernameEditText.setText("")
+            binding.passwordEditText.setText("")
+            true
+        } else {
+            binding.error.setText("Wrong credentials")
+            false
+        }
+    }
+
+    private fun checkNormalUserCred(): Boolean {
+
+        runBlocking {
+            withContext(Dispatchers.IO) {
+
+                Model.getInstanceWC().evaluateNormalUser(binding.usernameEditText.text.toString(), binding.passwordEditText.text.toString())
+                println(Model.getInstanceWC().getClientLoginFlag())
+            }
+        }
+
+
+        return if (Model.getInstanceWC().getClientLoginFlag()) {
+            binding.usernameEditText.setText("")
+            binding.passwordEditText.setText("")
+            true
+        } else {
+            binding.error.setText("Wrong credentials")
+            false
+        }
+    }
     fun showPopup() {
         val popupBinding: UserCreatePopupBinding = UserCreatePopupBinding.inflate(LayoutInflater.from(binding.root.context))
         val popupView: View = popupBinding.root

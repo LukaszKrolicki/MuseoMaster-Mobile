@@ -1,15 +1,15 @@
 package eu.pl.snk.senseibunny.museomaster.models;
 
 public class Client {
-    private final int idPracownika;
-    private final String imiePracownika;
-    private final String nazwiskoPracownika;
-    private final String emailPracownika;
-    private final int wiekPracownika;
-    private final int czyUprawniony;
-    private final String rola;
-    private final int nrTelefonu;
-    private final String nazwaUzytkownika;
+    private int idPracownika;
+    private String imiePracownika;
+    private String nazwiskoPracownika;
+    private String emailPracownika;
+    private int wiekPracownika;
+    private int czyUprawniony;
+    private String rola;
+    private int nrTelefonu;
+    private String nazwaUzytkownika;
 
     public Client(int idPracownika, String imiePracownika, String nazwiskoPracownika, String emailPracownika, int wiekPracownika, int czyUprawniony, String rola, int nrTelefonu, String nazwaUzytkownika) {
         this.idPracownika = idPracownika;
@@ -27,47 +27,71 @@ public class Client {
         return idPracownika;
     }
 
-    public String getNazwaUzytkownika() {
-        return nazwaUzytkownika;
+    public void setIdPracownika(int idPracownika) {
+        this.idPracownika = idPracownika;
     }
 
-    public int getNrTelefonu() {
-        return nrTelefonu;
-    }
-
-    public int idPracownikaProperty() {
-        return idPracownika;
-    }
-
-    public String imiePracownikaProperty() {
+    public String getImiePracownika() {
         return imiePracownika;
     }
 
-    public String nazwiskoPracownikaProperty() {
+    public void setImiePracownika(String imiePracownika) {
+        this.imiePracownika = imiePracownika;
+    }
+
+    public String getNazwiskoPracownika() {
         return nazwiskoPracownika;
     }
 
-    public String emailPracownikaProperty() {
+    public void setNazwiskoPracownika(String nazwiskoPracownika) {
+        this.nazwiskoPracownika = nazwiskoPracownika;
+    }
+
+    public String getEmailPracownika() {
         return emailPracownika;
     }
 
-    public int wiekPracownikaProperty() {
+    public void setEmailPracownika(String emailPracownika) {
+        this.emailPracownika = emailPracownika;
+    }
+
+    public int getWiekPracownika() {
         return wiekPracownika;
     }
 
-    public int czyUprawnionyProperty() {
+    public void setWiekPracownika(int wiekPracownika) {
+        this.wiekPracownika = wiekPracownika;
+    }
+
+    public int getCzyUprawniony() {
         return czyUprawniony;
     }
 
-    public String rolaProperty() {
-        return rola;
+    public void setCzyUprawniony(int czyUprawniony) {
+        this.czyUprawniony = czyUprawniony;
     }
 
     public String getRola() {
         return rola;
     }
 
-    public String nazwaUzytkownikaProperty() {
+    public void setRola(String rola) {
+        this.rola = rola;
+    }
+
+    public int getNrTelefonu() {
+        return nrTelefonu;
+    }
+
+    public void setNrTelefonu(int nrTelefonu) {
+        this.nrTelefonu = nrTelefonu;
+    }
+
+    public String getNazwaUzytkownika() {
         return nazwaUzytkownika;
+    }
+
+    public void setNazwaUzytkownika(String nazwaUzytkownika) {
+        this.nazwaUzytkownika = nazwaUzytkownika;
     }
 }

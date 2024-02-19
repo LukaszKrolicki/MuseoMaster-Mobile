@@ -42,7 +42,7 @@ class SearchedUserAdapter (private val userList: ArrayList<Client>) : RecyclerVi
 
         fun bind(client: Client) {
             nameTextView.text = client.getNazwaUzytkownika()
-            emailTextView.text = client.emailPracownikaProperty()
+            emailTextView.text = client.emailPracownika
             itemBinding.work.text = client.rola
 
             itemBinding.workerCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->

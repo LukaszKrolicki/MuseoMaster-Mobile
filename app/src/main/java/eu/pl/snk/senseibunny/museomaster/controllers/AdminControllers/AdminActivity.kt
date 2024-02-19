@@ -55,6 +55,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_add_room-> {openFragment(AddRoomFragment())}
             R.id.nav_user_list->{openFragment(UserListFragment())}
             R.id.nav_bugs->{openFragment(ReportFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

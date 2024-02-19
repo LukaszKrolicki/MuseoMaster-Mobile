@@ -40,6 +40,7 @@ class PermissionTechnicalWorkerActivity : AppCompatActivity(), NavigationView.On
             R.id.AssignTask -> {openFragment(UserSearchFragment())}
             R.id.ExhibitsList -> {openFragment(ExhibitsAssignedFragment())}
             R.id.bug -> {openFragment(BugFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

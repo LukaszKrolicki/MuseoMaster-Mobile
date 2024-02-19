@@ -50,6 +50,7 @@ class PermissionWorkerActivity : AppCompatActivity(), NavigationView.OnNavigatio
             R.id.bug->{openFragment(BugFragment())}
             R.id.taskAssignedTo->{openFragment(AssignedToListFragment())}
             R.id.AssignTask->{openFragment(UserSearchFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

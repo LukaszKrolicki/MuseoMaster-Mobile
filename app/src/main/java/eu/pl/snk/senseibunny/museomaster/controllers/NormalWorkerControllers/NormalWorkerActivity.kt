@@ -52,6 +52,7 @@ class NormalWorkerActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
             R.id.taskFinished-> {openFragment(EndedTaskListFragment())}
             R.id.bug->{openFragment(BugFragment())}
+            R.id.logout->finish()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
