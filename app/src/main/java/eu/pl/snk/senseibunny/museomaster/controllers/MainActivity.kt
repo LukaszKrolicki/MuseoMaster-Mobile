@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+            val intent = Intent(this, TechnicalWorkerActivity::class.java)
+
+            startActivity(intent)
         }
 
         binding.CreateButton.setOnClickListener{

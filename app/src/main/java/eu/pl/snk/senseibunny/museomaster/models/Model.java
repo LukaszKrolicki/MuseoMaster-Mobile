@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import java.util.Date;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -55,6 +56,15 @@ public class Model {
 
     ////////////////////////////////////////////////////////////////
 
+    //Technical Worker
+    private final ArrayList<Exhibit> exhibitsAssigned;
+
+    private final ArrayList<Exhibit> exhibitsChecked;
+
+    private final ArrayList<Integer> exIds;
+
+    ///////////////////////////////////////////////////////////////
+
     private Model(Context context) throws SQLException {
 
         this.client = new Client(0, "", "", "", 0, 0, "x", 0, "x");
@@ -79,6 +89,12 @@ public class Model {
         this.tasksAssignedTo = new ArrayList<Task>();
         this.workersAssigned = new ArrayList<Client>();
         this.exAssigned = new ArrayList<Exhibit>();
+
+        //Technical Worker
+        this.exhibitsAssigned = new ArrayList<>();
+        this.exhibitsChecked = new ArrayList<>();
+        this.exIds = new ArrayList<>();
+
 
 
     }
@@ -592,6 +608,64 @@ public class Model {
             throw new RuntimeException(e);
         }
     }
+
+
+    //Technical Worker
+    ArrayList<Integer> idZadList = new ArrayList<>();
+    ArrayList<Integer> idZadExList = new ArrayList<>();
+    public void setExIds() throws SQLException {
+        for (Task task : tasks) {
+            ResultSet resultSet = dataBaseDriver.getTechnicianEx(task.getIdZadania(), client.getIdPracownika());
+            while (resultSet.next()) {
+                int value = resultSet.getInt(1);
+                Integer idZadEx=resultSet.getInt(2);
+                Integer idZad=task.getIdZadania();
+                idZadList.add(idZad);
+                idZadExList.add(idZadEx);
+                exIds.add(value);
+            }
+        }
+    }
+
+    public void clearExIds() {
+        idZadExList.clear();
+        idZadList.clear();
+        exIds.clear();
+    }
+
+    public void setExModel() throws SQLException {
+        int i=0;
+        for (Integer id : exIds) {
+            ResultSet resultSet = dataBaseDriver.getExById(id);
+
+            while (resultSet.next()) {
+
+                Integer idEx= resultSet.getInt(1);
+                String nazwaEksponatu=resultSet.getString(2);
+                String docMiejsce=resultSet.getString(3);
+                String aktualMiejscePrzech=resultSet.getString(4);
+                if(!docMiejsce.isBlank() || !docMiejsce.equals("-"))
+                {
+                    Exhibit x = new Exhibit(idEx,nazwaEksponatu,aktualMiejscePrzech,docMiejsce, idZadList.get(i),idZadExList.get(i));
+                    i++;
+                    exhibitsAssigned.add(x);
+                }
+            }
+        }
+    }
+    public void checkExhibit(Exhibit exhibit) {exhibitsChecked.add(exhibit);}
+
+    public void uncheckExhibit(Exhibit exhibit) {exhibitsChecked.remove(exhibit);}
+
+    public void clearCheckedEx() {exhibitsChecked.clear();}
+
+    public void clearExAssigned() {exhibitsAssigned.clear();}
+
+    public ArrayList<Exhibit> getExChecked() {return exhibitsChecked;}
+
+
+    public ArrayList<Exhibit> getExhibitsAssigned() {return exhibitsAssigned;}
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
