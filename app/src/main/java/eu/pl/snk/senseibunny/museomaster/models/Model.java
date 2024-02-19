@@ -39,6 +39,8 @@ public class Model {
     private final ArrayList<Task> tasks;
     private final ArrayList<Task> tasks_finished;
 
+    private final ArrayList<Exhibit> exAssigned;
+
     ////////////////////////////////////////////////
 
 
@@ -46,6 +48,8 @@ public class Model {
     private final ArrayList<Task> tasksAssignedTo;
 
     private final ArrayList<Client> workersAssigned;
+
+    private int searchTaskFlag =0;
 
     ////////////////////////////////////////////////////////////////
 
@@ -72,6 +76,7 @@ public class Model {
         //Worker+
         this.tasksAssignedTo = new ArrayList<Task>();
         this.workersAssigned = new ArrayList<Client>();
+        this.exAssigned = new ArrayList<Exhibit>();
 
 
     }
@@ -434,32 +439,31 @@ public class Model {
         tasksAssignedTo.add(0, task);
     }
 
-//    public void assignEx(Exhibit ex) {
-//        exAssigned.add(ex);
-//        System.out.println(exAssigned);
-//    }
-//
-//    public void removeEx(Exhibit ex) {
-//        exAssigned.remove(ex);
-//        System.out.println(exAssigned);
-//    }
+    public void assignEx(Exhibit ex) {
+        exAssigned.add(ex);
+        System.out.println(exAssigned);
+    }
 
-//    public void clearEx(){
-//        exAssigned.clear();
-//    }
+    public void removeEx(Exhibit ex) {
+        exAssigned.remove(ex);
+        System.out.println(exAssigned);
+    }
 
-//    public ObservableList<Exhibit> getExAssigned() {
-//        return exAssigned;
-//    }
+    public void clearEx(){
+        exAssigned.clear();
+    }
 
+    public ArrayList<Exhibit> getExAssigned() {
+        return exAssigned;
+    }
 
-//    public void setAssignedToTaskLV(ListView x) {
-//        assigned_task_to_listview = x;
-//    }
-//
-//    public void refreshAssignedToTaskLV() {
-//        assigned_task_to_listview.refresh();
-//    }
+    public int getSearchTaskFlag() {
+        return searchTaskFlag;
+    }
+
+    public void setSearchTaskFlag(int searchTaskFlag) {
+        this.searchTaskFlag = searchTaskFlag;
+    }
 
     public void updateAssignedTasks(String type) {
         ResultSet resultSet;
