@@ -701,29 +701,27 @@ public class DataBaseDriver{
         }
     }
 
-//    public void createNormalClient(String email, String haslo, String nazwaUzytkownika){
-//        Statement statement ;
-//        ResultSet resultSet;
-//        try{
-//            statement=this.conn.createStatement();
-//
-//            resultSet = statement.executeQuery("SELECT * FROM zwyklyuzytkownik WHERE nazwaUzytkownika='" + nazwaUzytkownika + "';");
-//
-//            if (resultSet.next()) {
-//                // User with the same "nazwaUzytkownika" already exists
-//                Model.getInstance().getViewFactory().get_normal_user_err_label().setText("Użytkownik o takim loginie już istnieje...");
-//            }
-//            else{
-//                statement.executeUpdate("INSERT INTO zwyklyuzytkownik (email,haslo,nazwaUzytkownika) VALUES ('"+email+"','"+haslo+"','"+nazwaUzytkownika+"');");
-//                Model.getInstance().getViewFactory().get_normal_user_err_label().setText("");
-//                Model.getInstance().getViewFactory().get_login_err_label().setTextFill(Color.GREEN);
-//                Model.getInstance().getViewFactory().get_login_err_label().setText("Stworzono użytkownika pomyślnie!");
-//            }
-//
-//        } catch (SQLException e) {
-//
-//        }
-//    }
+    public int createNormalClient(String email, String haslo, String nazwaUzytkownika){
+        Statement statement ;
+        ResultSet resultSet;
+        try{
+            statement=this.conn.createStatement();
+
+            resultSet = statement.executeQuery("SELECT * FROM zwyklyuzytkownik WHERE nazwaUzytkownika='" + nazwaUzytkownika + "';");
+
+            if (resultSet.next()) {
+                // User with the same "nazwaUzytkownika" already exists
+                return 1;
+            }
+            else{
+                statement.executeUpdate("INSERT INTO zwyklyuzytkownik (email,haslo,nazwaUzytkownika) VALUES ('"+email+"','"+haslo+"','"+nazwaUzytkownika+"');");
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            return 1;
+        }
+    }
 
     public ResultSet getHashedPasswordNormalUser(String username){
         Statement statement;
