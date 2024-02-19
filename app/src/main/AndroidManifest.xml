@@ -15,15 +15,14 @@
         android:theme="@style/Theme.MuseoMaster"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
+
             android:name=".controllers.utilsControllers.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".controllers.utilsControllers.SearchExActivity"
-=======
+
             android:name=".controllers.MuseumClientControllers.MuseumClientActivity"
->>>>>>> 8a57e305686454cdede22fbd7866337db5194fa3
             android:exported="false" />
+
         <activity
             android:name=".controllers.PermissionTechWorker.PermissionTechnicalWorkerActivity"
             android:exported="false" />
