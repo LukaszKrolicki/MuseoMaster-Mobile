@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
 
-            val intent = Intent(this, PermissionTechnicalWorkerActivity::class.java)
+            val intent = Intent(this, TechnicalWorkerActivity::class.java)
 
             startActivity(intent)
         }

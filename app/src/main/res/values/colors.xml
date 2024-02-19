@@ -11,4 +11,6 @@
     <color name="dark_green">#FF008E26</color>
     <color name="error">#FD0000</color>
     <color name="success">#4CAF50</color>
+    <color name="red">#FD0000</color>
+    <color name="blue">#0533DB</color>
 </resources>

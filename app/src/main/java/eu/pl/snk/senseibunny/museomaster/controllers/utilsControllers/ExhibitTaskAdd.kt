@@ -24,7 +24,7 @@ class ExhibitTaskAdd : AppCompatActivity() {
 
 
         println( Model.getInstanceWC().exhibitsSearched)
-        val adapter= ExhibitTaskAdapter(Model.getInstanceWC().exhibitsSearched)
+        val adapter = ExhibitTaskAdapter(Model.getInstanceWC().exhibitsSearched)
         binding.recyclerView.adapter=adapter
 
         runBlocking {
