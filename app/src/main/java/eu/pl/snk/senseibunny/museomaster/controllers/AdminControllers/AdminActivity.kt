@@ -35,7 +35,6 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         fragmentManage = supportFragmentManager
         openFragment(AddUserFragment())
         binding.navigationDrawer.setNavigationItemSelectedListener(this)
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
